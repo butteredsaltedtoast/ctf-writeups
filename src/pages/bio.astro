@@ -1,0 +1,35 @@
+  ---
+  import BaseHead from '../components/BaseHead.astro';
+  import Footer from '../components/Footer.astro';
+  import Header from '../components/Header.astro';
+  import { SITE_TITLE } from '../consts';
+  ---
+
+  <!doctype html>
+  <html lang="en">
+        <head>
+                <BaseHead title={`Bio | ${SITE_TITLE}`} description="About .butteredtoast" />
+        </head>
+        <body>
+                <Header />
+                <main>
+                        <h1>.butteredtoast</h1>
+                        <p>Hello! I'm a CTF player and student. I play with <a href="https://ctftime.org/team/53812" target="_blank">tjcsc</a>.</p>
+                        <p>I only started doing all of this CTF stuff recently, but I'm enjoying it, thankfully. Except paper-2.</p>
+
+                        <p>My main category is web, though I want to branch out into pwn and rev when I get good enough.</p>
+
+                        <p> Outside of CTFs, I do a lot of web dev and a little bit of competitive programming. I wanna get into game dev, though. </p>
+
+                        <p> I like buttered toast. </p>
+
+                        <p> Here's my CTFtime and GitHub if you want to stalk me: </p>
+
+                        <p>
+                                <a href="https://ctftime.org/user/butteredtoast" target="_blank">CTFtime</a> ·
+                                <a href="https://github.com/butteredsaltedtoast" target="_blank">GitHub</a>
+                        </p>
+                </main>
+                <Footer />
+        </body>
+  </html>

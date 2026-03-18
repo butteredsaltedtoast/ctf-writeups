@@ -3,46 +3,112 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+
+import { getCollection } from 'astro:content';
+import FormattedDate from '../components/FormattedDate.astro';
+
+const recentWriteups = (await getCollection('writeups'))
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+	.slice(0, 2);
+
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+
+				<style>
+
+			main {
+				display: flex;
+				flex-direction: column;
+				padding: 6em 2em;
+				gap: 4em;
+			}
+
+			.stars {
+				position: fixed;
+				inset: 0;
+				pointer-events: none;
+				z-index: -1;
+			}
+
+			.star {
+				position: absolute;
+				color: #FFD97D;
+				animation: twinkle 3s ease-in-out infinite alternate;
+			}
+
+			@keyframes twinkle {
+				0% {
+					opacity: 0.3;
+					transform: scale(0.95);
+				}
+				100% {
+					opacity: 1;
+					transform: scale(1.05);
+				}
+			}
+
+			.hero {
+				display: flex;
+				flex-direction: column;
+			}
+
+			.handle {
+				font-family: 'Space Grotesk', sans-serif;
+				font-size: clamp(2.5rem, 6vw, 5rem);
+				margin: 0;
+			}
+
+			.recent {
+				max-width: 800px;
+				width: 100%;
+			}
+
+		</style>
+
 	</head>
 	<body>
+
+	<div class="stars" aria-hidden="true">
+        <span class="star" style="top: 10%; left: 15%; font-size: 0.6rem; animation-delay: 0s;">✦</span>
+        <span class="star" style="top: 25%; left: 72%; font-size: 1rem; animation-delay: 1.2s;">✦</span>
+        <span class="star" style="top: 5%; left: 45%; font-size: 0.4rem; animation-delay: 0.5s;">✦</span>
+        <span class="star" style="top: 60%; left: 88%; font-size: 0.7rem; animation-delay: 2s;">✦</span>
+        <span class="star" style="top: 40%; left: 5%; font-size: 0.5rem; animation-delay: 0.8s;">✦</span>
+        <span class="star" style="top: 80%; left: 30%; font-size: 0.8rem; animation-delay: 1.5s;">✦</span>
+        <span class="star" style="top: 15%; left: 90%; font-size: 0.4rem; animation-delay: 2.5s;">✦</span>
+        <span class="star" style="top: 70%; left: 55%; font-size: 0.6rem; animation-delay: 0.3s;">✦</span>
+  	</div>
 		<Header />
 		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This template
-				serves as a lightweight, minimally-styled starting point for anyone looking to build a personal
-				website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to
-				<a href="https://docs.astro.build/">read the docs</a>
-				or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out
-				<a href="https://github.com/Charca/astro-blog-template">astro-blog-template</a>
-				by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
+
+			<section class="hero">
+				<h1 class = "handle">.butteredtoast</h1>
+			</section>
+
+			<section class="recent">
+				<h2>Recent Writeups</h2>
+
+				<div class="recent-grid">
+					{recentWriteups.map((post) => (
+						<a href={`/writeups/${post.id}/`} class="card">
+							<div class="card-top">
+								<span class="category">{post.data.category}</span>
+								<span class="ctf">{post.data.ctf}</span>
+							</div>
+							<h3 class="title">{post.data.title}</h3>
+							<div class="card-bottom">
+								<span class="date"><FormattedDate date={post.data.pubDate} /></span>
+							</div>
+						</a>
+					))}
+				</div>
+
+			</section>
+
 		</main>
 		<Footer />
 	</body>

@@ -2,9 +2,9 @@ import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
-const blog = defineCollection({
-	// Load Markdown and MDX files in the `src/content/blog/` directory.
-	loader: glob({ base: './src/content/blog', pattern: '**/*.{md,mdx}' }),
+const writeups = defineCollection({
+	// Load Markdown and MDX files in the `src/content/writeups/` directory.
+	loader: glob({ base: './src/content/writeups', pattern: '**/*.{md,mdx}' }),
 	// Type-check frontmatter using a schema
 	schema: ({ image }) =>
 		z.object({
@@ -14,7 +14,10 @@ const blog = defineCollection({
 			pubDate: z.coerce.date(),
 			updatedDate: z.coerce.date().optional(),
 			heroImage: z.optional(image()),
+			
+			ctf: z.string(),
+			category: z.enum(['pwn', 'web', 'crypto', 'reversing', 'misc', 'osint', 'forensics']),
 		}),
 });
 
-export const collections = { blog };
+export const collections = { writeups };
