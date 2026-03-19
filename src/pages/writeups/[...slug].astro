@@ -1,7 +1,6 @@
 ---
 import { type CollectionEntry, getCollection, render } from 'astro:content';
 import BlogPost from '../../layouts/BlogPost.astro';
-import Stars from '../../components/Stars.astro';
 
 export async function getStaticPaths() {
 	const posts = await getCollection('writeups');
@@ -20,4 +19,3 @@ const { Content } = await render(post);
 <BlogPost {...post.data}>
 	<Content />
 </BlogPost>
-<Stars />

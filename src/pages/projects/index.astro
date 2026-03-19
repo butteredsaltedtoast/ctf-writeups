@@ -27,66 +27,67 @@ const projects = (await getCollection('projects')).sort(
             </a>
         ))}
     </div>
+
+    <style>
+
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 4em 2em;
+        }
+
+        h1 {
+            color: var(--accent);
+            margin-bottom: 2em;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        .project-card {
+            display: grid;
+            grid-template-columns: 200px 1fr auto;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            gap: 1.5rem;
+            min-height: 100px;
+            max-height: 100px;
+        }
+
+        .project-left {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .description {
+            font-size: 0.85rem;
+            color: var(--text);
+            margin: 0;
+        }
+
+        .stack {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+            font-size: 0.75rem;
+            color: var(--accent-secondary);
+            align-items: flex-end;
+            text-align: right;
+            white-space: nowrap;
+        }
+
+        .tag-django { color: #44B78B; }
+        .tag-javascript { color: #F7DF1E; }
+        .tag-css { color: #264DE4; }
+        .tag-next\.js { color: #EDEDED; }
+        .tag-typescript { color: #3178C6; }
+        .tag-tailwind { color: #38BDF8; }
+        .tag-llama { color: #9D00FF; }
+
+    </style>
+
 </BaseLayout>
-
-<style>
-
-	main {
-		max-width: 1100px;
-		margin: 0 auto;
-		padding: 4em 2em;
-	}
-
-	h1 {
-		color: var(--accent);
-		margin-bottom: 2em;
-	}
-
-	.grid {
-		display: grid;
-		grid-template-columns: 1fr;
-		gap: 1rem;
-	}
-
-    .project-card {
-        display: grid;
-        grid-template-columns: 200px 1fr auto;
-        align-items: center;
-        padding: 0.75rem 1.5rem;
-        gap: 1.5rem;
-        min-height: 100px;
-        max-height: 100px;
-    }
-
-    .project-left {
-        display: flex;
-        flex-direction: column;
-        gap: 0;
-    }
-
-    .description {
-        font-size: 0.85rem;
-        color: var(--text);
-        margin: 0;
-    }
-
-    .stack {
-        display: flex;
-        flex-direction: column;
-        gap: 0.25rem;
-        font-size: 0.75rem;
-        color: var(--accent-secondary);
-        align-items: flex-end;
-        text-align: right;
-        white-space: nowrap;
-    }
-
-    .tag-django { color: #44B78B; }
-    .tag-javascript { color: #F7DF1E; }
-    .tag-css { color: #264DE4; }
-    .tag-next\.js { color: #EDEDED; }
-    .tag-typescript { color: #3178C6; }
-    .tag-tailwind { color: #38BDF8; }
-    .tag-llama { color: #9D00FF; }
-
-</style>
