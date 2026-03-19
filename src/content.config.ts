@@ -20,4 +20,19 @@ const writeups = defineCollection({
 		}),
 });
 
-export const collections = { writeups };
+const projects = defineCollection({
+
+	loader: glob({ base: './src/content/projects', pattern: '**/*.{md,mdx}' }),
+	schema: ({ image }) =>
+		z.object({
+			title: z.string(),
+			description: z.string(),
+			pubDate: z.coerce.date(),
+
+			github: z.string(),
+			stack: z.array(z.string()),
+		}),
+
+});
+
+export const collections = { writeups, projects };

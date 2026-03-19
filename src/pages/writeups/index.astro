@@ -1,45 +1,32 @@
 ---
 import { getCollection } from 'astro:content';
-import BaseHead from '../../components/BaseHead.astro';
-import Footer from '../../components/Footer.astro';
-import Header from '../../components/Header.astro';
-import { SITE_TITLE } from '../../consts';
 import FormattedDate from '../../components/FormattedDate.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const writeups = (await getCollection('writeups')).sort(
 	(a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
 );
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={`Writeups | ${SITE_TITLE}`} description="CTF writeups" />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<h1>Writeups</h1>
-			<div class="grid">
-				{writeups.map((post) => (
+<BaseLayout title="Writeups" description="Writeups from CTFs I've participated in.">
+	<h1>Writeups</h1>
+	<div class="grid">
+		{writeups.map((post) => (
 
-					<a href={`/writeups/${post.id}/`} class="card">
-						<div class="card-top">
-							<span class="category">{post.data.category}</span>
-							<span class="ctf">{post.data.ctf}</span>
-						</div>
-						<h2 class="title">{post.data.title}</h2>
-						<div class="card-bottom">
-							<span class="date"><FormattedDate date={post.data.pubDate} /></span>
-						</div>
-					</a>
+			<a href={`/writeups/${post.id}/`} class="card">
+				<div class="card-top">
+					<span class={`category category-${post.data.category}`}>{post.data.category}</span>
+					<span class="ctf">{post.data.ctf}</span>
+				</div>
+				<h2 class="title">{post.data.title}</h2>
+				<div class="card-bottom">
+					<span class="date"><FormattedDate date={post.data.pubDate} /></span>
+				</div>
+			</a>
 
-				))}
-			</div>
-		</main>
-		<Footer />
-	</body>
-</html>
+		))}
+	</div>
+</BaseLayout>
 
 <style>
 
@@ -59,5 +46,13 @@ const writeups = (await getCollection('writeups')).sort(
 		grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
 		gap: 1.5rem;
 	}
+
+	.category-pwn { color: #FF69B4; }
+	.category-web { color: #00E5A0; }
+	.category-crypto { color: #FF5E00; }
+	.category-reversing { color: #FFD100; }
+	.category-misc { color: #9D00FF; }
+	.category-osint { color: #FF003C; }
+	.category-forensics { color: #00CFFF; }
 
 </style>

@@ -1,4 +1,6 @@
   ---
+  import { ClientRouter } from 'astro:transitions';
+  
   interface Props {
         title: string;
         description: string;
@@ -21,3 +23,4 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/src/styles/global.css" />
+  <ClientRouter />

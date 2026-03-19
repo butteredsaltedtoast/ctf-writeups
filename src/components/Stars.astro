@@ -1,0 +1,80 @@
+---
+interface Props {
+    enabled?: boolean;
+}
+const { enabled = true } = Astro.props;
+---
+
+<div class="stars" aria-hidden="true" data-enabled={enabled}></div>
+
+<script>
+// @ts-nocheck
+
+    function initStars() {
+        const container = document.querySelector('.stars');
+        console.log('Initializing stars because enabled is', container?.dataset.enabled);
+        if (!container) return;
+
+        const enabled = container.dataset.enabled === 'true';
+
+        if (!enabled) {
+            container.innerHTML = '';
+            return;
+        }
+
+        if (container.children.length > 0) return;
+
+        const count = 30;
+
+        for (let i = 0; i < count; i++) {
+            const star = document.createElement('span');
+            star.textContent = '✦';
+            star.classList.add('star');
+            const top = Math.random() * 100;
+            const left = Math.random() * 100;
+
+            if (Math.sqrt((left - 50) ** 2 + (top - 50) ** 2) < 40) {
+                i--;
+                continue;
+            }
+
+            star.style.top = `${top}%`;
+            star.style.left = `${left}%`;
+            star.style.fontSize = `${Math.random() * 0.8 + 0.3}rem`;
+            star.style.setProperty('--duration', `${Math.random() * 3 + 2}s`);
+            star.style.setProperty('--delay', `${Math.random() * 4}s`);
+            star.style.setProperty('--min-opacity', `${Math.random() * 0.3 + 0.4}`);
+            container.appendChild(star);
+        } 
+    }
+
+    initStars();
+    document.addEventListener('astro:page-load', initStars);
+
+</script>
+
+<style is:global>
+    .stars {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: -1;
+        animation: starsfadeIn 0.8s ease forwards;
+    }
+
+    @keyframes starsfadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+  .star {
+      position: absolute;
+      color: #FFD97D;
+      animation: twinkle var(--duration) var(--delay) ease-in-out infinite;
+  }
+
+  @keyframes twinkle {
+      0%, 100% { opacity: var(--min-opacity); transform: scale(0.95); }
+      50% { opacity: 1; transform: scale(1.05); }
+  }
+</style>

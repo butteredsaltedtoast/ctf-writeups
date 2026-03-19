@@ -1,0 +1,70 @@
+<div class="shooting-stars" aria-hidden="true"></div>
+
+<script>
+// @ts-nocheck
+
+    function createShootingStar() {
+        const container = document.querySelector('.shooting-stars');
+        if (!container) return;
+
+        const star = document.createElement('div');
+        star.classList.add('shooting-star');
+        container.appendChild(star);
+
+        star.style.left = `${Math.random() * 80 + 20}vw`;
+        star.style.top = `0`;
+
+        star.addEventListener('animationend', () => {
+            star.remove();
+        });
+
+    }
+
+    function schedule() {
+        const delay = 250;
+        setTimeout(() => {
+            createShootingStar();
+            schedule();
+        }, delay);
+    }
+
+    schedule();
+
+</script>
+
+<style is:global>
+
+    .shooting-stars {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: -1;
+        overflow: hidden;
+    }
+
+    .shooting-star {
+        position: absolute;
+        width: 150px;
+        height: 1px;
+        background: linear-gradient(90deg, rgba(255, 217, 125, 0), #FFD97D, rgba(255, 255, 255, 0.8));
+        border-radius: 50%;
+        animation: shoot 1.5s ease-out forwards;
+    }
+
+    @keyframes shoot {
+        0%
+        {
+            opacity: 0;
+            transform: rotate(135deg) translateX(0);
+        }
+        20% {
+            opacity: 1;
+        }
+        100%
+        {
+            opacity: 0;
+            transform: rotate(135deg) translateX(1200px);
+        }
+    }
+
+</style>

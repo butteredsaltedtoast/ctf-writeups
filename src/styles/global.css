@@ -101,7 +101,8 @@ img {
 }
 code {
 	padding: 2px 5px;
-	background-color: rgb(var(--surface));
+	background-color: #000000;
+	color: var(--accent);
 	border-radius: 2px;
 }
 pre {
@@ -116,10 +117,11 @@ blockquote {
 	padding: 0 0 0 20px;
 	margin: 0;
 	font-size: 1.333em;
-}
+}	
 hr {
 	border: none;
-	border-top: 1px solid var(--surface);
+	border-top: 1px solid rgba(255, 217, 125, 0.3);
+	margin: 1em 0;
 }
 @media (max-width: 720px) {
 	body {
