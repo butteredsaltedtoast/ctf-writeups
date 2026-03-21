@@ -41,6 +41,14 @@ const recentWriteups = (await getCollection('writeups'))
 			width: 100%;
 		}
 
+		.category-pwn { color: #FF69B4; }
+		.category-web { color: #00E5A0; }
+		.category-crypto { color: #FF5E00; }
+		.category-reversing { color: #FFD100; }
+		.category-misc { color: #9D00FF; }
+		.category-osint { color: #FF003C; }
+		.category-forensics { color: #00CFFF; }
+
 	</style>
 
 	<section class="hero">
@@ -56,7 +64,7 @@ const recentWriteups = (await getCollection('writeups'))
 			{recentWriteups.map((post) => (
 				<a href={`/writeups/${post.id}/`} class="card">
 					<div class="card-top">
-						<span class="category">{post.data.category}</span>
+						<span class={`category category-${post.data.category}`}>{post.data.category}</span>
 						<span class="ctf">{post.data.ctf}</span>
 					</div>
 					<h3 class="title">{post.data.title}</h3>
