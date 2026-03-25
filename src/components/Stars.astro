@@ -47,6 +47,13 @@ const { enabled = true } = Astro.props;
             star.style.setProperty('--min-opacity', `${Math.random() * 0.3 + 0.4}`);
             container.appendChild(star);
         } 
+
+        container.style.opacity = '0';
+        requestAnimationFrame(() => {
+            container.style.transition = 'opacity 0.8s ease';
+            container.style.opacity = '1';
+        });
+
     }
 
     initStars();
