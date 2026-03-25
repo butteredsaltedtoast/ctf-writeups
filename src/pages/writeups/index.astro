@@ -10,6 +10,7 @@ const writeups = (await getCollection('writeups')).sort(
 
 <BaseLayout title="Writeups" description="Writeups from CTFs I've participated in.">
 	<h1>Writeups</h1>
+
 	<div class="grid">
 		{writeups.map((post) => (
 
@@ -37,7 +38,7 @@ const writeups = (await getCollection('writeups')).sort(
 
 	h1 {
 		color: var(--accent);
-		margin-bottom: 2em;
+		margin-bottom: 0.5em;
 	}
 
 	.grid {
