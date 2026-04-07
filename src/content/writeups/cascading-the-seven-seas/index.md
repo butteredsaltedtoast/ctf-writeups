@@ -20,7 +20,7 @@ We are given only a link, `https://css.ctf.ritsec.club/`.
 
 Going to this link reveals a page with an onscreen keyboard and three questions, the first asking what the biggest ocean is. Answering correctly with `PACIFIC` continues the quiz with asking what the biggest aquatic animal is. Answering `WHALE` is incorrect, however.
 
-Let's get the source code for now:
+Let's get the source code for now: <br>
 `curl -s https://css.ctf.ritsec.club/ -o whatever.html`
 
 The HTML file is 723 kB? That's odd. Looking through it, we can see css @function tags defining functions for bitwise operations, memory access, and even an instruction decoder that maps to x86.
@@ -46,7 +46,7 @@ That works! Let's take a look...
 
 The first few bytes are `CC 90 90 90...` up until offset `0x100`. After doing some research, I figured out that this is the layout of a COM program.
 
-Let's disassemble with this command:
+Let's disassemble with this command: <br>
 `ndisasm -b 16 -o 0x100 -e 0x100 program.bin`
 
 That works too, produces a x86-16 assembly with 5 functions: print_string, read_input, print_number, check, and main.
