@@ -214,3 +214,5 @@ Eventually, I stumbled upon "director."
 
 That lets us through and gives us the flag `tjctf{7h47_is_4_nic3_k3yc4rd_y0u_g07_7h3r3}`!
 Fun JWT forgery chall <del>even though it was a little guessy</del>
+
+Thank you to `@maybe_sleep_deprived`, a member of my team who worked with me on this challenge!
