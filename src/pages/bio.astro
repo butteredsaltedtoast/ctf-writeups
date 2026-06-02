@@ -4,19 +4,106 @@ import { SITE_TITLE } from '../consts';
 ---
 
 <BaseLayout title={`Bio | ${SITE_TITLE}`} description="About Me">
-<h1>.butteredtoast</h1>
-<p>Hello! I'm a high school student and CTF player based in Northern Virginia. I compete with <a href="https://ctftime.org/team/53812" target="_blank">tjcsc</a>.</p>
+	<h1 class="bio-name">.butteredtoast</h1>
 
-<p>My main category is web, and I'm branching out into pwn and rev as secondary categories.</p>
+	<div class="bio-layout">
+		<div class="prose">
+			<p>Hello! I'm a high school student and CTF player based in Northern Virginia. I compete with <a href="https://ctftime.org/team/53812" target="_blank">tjcsc</a>.</p>
+			<p>My main category is web, and I'm branching out into pwn and rev as secondary categories.</p>
+			<p>Outside of CTFs, I do web dev and some competitive programming on the side, maybe challenge building if I get a good idea. Trying to get into some game dev soon.</p>
+			<p>I like buttered toast.</p>
+		</div>
 
-<p> Outside of CTFs, I do web dev and some competitive programming on the side, maybe challenge building if I get a good idea. Trying to get into some game dev soon.</p>
+		<aside class="info-card">
+			<div class="info-row">
+				<span class="info-label">Location</span>
+				<span>Northern Virginia</span>
+			</div>
+			<div class="info-row">
+				<span class="info-label">Team</span>
+				<span><a href="https://ctftime.org/team/53812" target="_blank">tjcsc</a></span>
+			</div>
+			<div class="info-row">
+				<span class="info-label">Focus</span>
+				<div class="specialties">
+					<span class="badge primary category-web">web</span>
+					<span class="badge category-pwn">pwn</span>
+					<span class="badge category-reversing">rev</span>
+				</div>
+			</div>
+			<div class="info-links">
+				<a href="https://ctftime.org/user/247161" target="_blank">CTFtime</a>
+				<a href="https://github.com/butteredsaltedtoast" target="_blank">GitHub</a>
+			</div>
+		</aside>
+	</div>
 
-<p> I like buttered toast. </p>
+	<style>
+		main { max-width: 900px; margin: 0 auto; padding: 4em 2em; }
 
-<p> Here's my CTFtime and GitHub if you want to stalk me: </p>
+		.bio-name {
+			background: linear-gradient(135deg, var(--text) 0%, var(--accent) 60%, var(--accent-secondary) 100%);
+			-webkit-background-clip: text;
+			background-clip: text;
+			color: transparent;
+			width: fit-content;
+			margin-bottom: var(--space-8);
+		}
 
-<p>
-        <a href="https://ctftime.org/user/247161" target="_blank">CTFtime</a> ·
-        <a href="https://github.com/butteredsaltedtoast" target="_blank">GitHub</a>
-</p>
+		.bio-layout {
+			display: grid;
+			grid-template-columns: 1fr 240px;
+			gap: var(--space-8);
+			align-items: start;
+		}
+
+		.prose p { margin-bottom: var(--space-6); }
+
+		.info-card {
+			background: linear-gradient(160deg, var(--surface-2) 0%, var(--surface) 100%);
+			border: 1px solid var(--border);
+			border-radius: var(--radius);
+			padding: var(--space-6);
+			display: flex;
+			flex-direction: column;
+			gap: var(--space-4);
+			font-size: 0.9rem;
+			position: sticky;
+			top: var(--space-8);
+		}
+
+		.info-row { display: flex; flex-direction: column; gap: var(--space-1); }
+
+		.info-label {
+			font-family: 'Space Grotesk', sans-serif;
+			font-size: 0.65rem;
+			text-transform: uppercase;
+			letter-spacing: 0.1em;
+			color: var(--text-muted);
+		}
+
+		.specialties { display: flex; gap: var(--space-2); flex-wrap: wrap; }
+
+		.badge {
+			font-size: 0.75rem;
+			padding: 0.15em 0.7em;
+			border: 1px solid currentColor;
+			border-radius: 999px;
+			opacity: 0.5;
+			white-space: nowrap;
+		}
+		.badge.primary { opacity: 1; font-weight: 700; }
+
+		.info-links {
+			display: flex;
+			gap: var(--space-4);
+			padding-top: var(--space-4);
+			border-top: 1px solid var(--border);
+		}
+
+		@media (max-width: 720px) {
+			.bio-layout { grid-template-columns: 1fr; }
+			.info-card { position: static; }
+		}
+	</style>
 </BaseLayout>

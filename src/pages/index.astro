@@ -34,6 +34,18 @@ const recentWriteups = (await getCollection('writeups'))
 			font-family: 'Space Grotesk', sans-serif;
 			font-size: clamp(2.5rem, 6vw, 5rem);
 			margin: 0;
+			background: linear-gradient(135deg, var(--text) 0%, var(--accent) 60%, var(--accent-secondary) 100%);
+			-webkit-background-clip: text;
+			background-clip: text;
+			color: transparent;
+			width: fit-content;
+		}
+
+		.tagline {
+			margin: var(--space-3) 0 0 0;
+			color: var(--text-muted);
+			font-size: 0.95rem;
+			letter-spacing: 0.04em;
 		}
 
 		.recent {
@@ -41,18 +53,11 @@ const recentWriteups = (await getCollection('writeups'))
 			width: 100%;
 		}
 
-		.category-pwn { color: #FF69B4; }
-		.category-web { color: #00E5A0; }
-		.category-crypto { color: #FF5E00; }
-		.category-reversing { color: #FFD100; }
-		.category-misc { color: #9D00FF; }
-		.category-osint { color: #FF003C; }
-		.category-forensics { color: #00CFFF; }
-
 	</style>
 
 	<section class="hero">
 		<h1 class = "handle">.butteredtoast</h1>
+		<p class="tagline">web-focused · he/him · acquiring savantism</p>
 	</section>
 
 	<hr />
