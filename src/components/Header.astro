@@ -11,6 +11,7 @@ import HeaderLink from './HeaderLink.astro';
 			<HeaderLink href="/writeups">Writeups</HeaderLink>
 			<HeaderLink href="/bio">Bio</HeaderLink>
 			<HeaderLink href="/projects">Projects</HeaderLink>
+			<HeaderLink href="/past-ctfs">Past CTFs</HeaderLink>
 		</div>
 		<div class="social-links">
 			<a href="https://github.com/butteredsaltedtoast" target="_blank">
@@ -50,6 +51,7 @@ import HeaderLink from './HeaderLink.astro';
 		color: var(--text);
 		text-decoration: none;
 		transition: color 0.2s ease;
+		white-space: nowrap;
 	}
 	nav a:hover {
 		color: var(--accent);
@@ -65,6 +67,7 @@ import HeaderLink from './HeaderLink.astro';
 	.internal-links {
 		display: flex;
 		justify-content: center;
+		flex: 0 1 auto;
 	}
 
 	.social-links,

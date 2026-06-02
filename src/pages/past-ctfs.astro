@@ -1,0 +1,130 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+
+const ctfs = (await getCollection('ctfs')).sort(
+	(a, b) => b.data.date.getTime() - a.data.date.getTime()
+);
+
+function ordinal(n: number) {
+	const s = ['th', 'st', 'nd', 'rd'];
+	const v = n % 100;
+	return n + (s[(v - 20) % 10] || s[v] || s[0]);
+}
+---
+
+<BaseLayout title="Past CTFs" description="Past CTF Competitions and Results.">
+	<h1>Past CTFs</h1>
+
+	<table class="board">
+		<thead>
+			<tr>
+				<th class="col-rank">Place</th>
+				<th>CTF</th>
+				<th class="col-team">Team</th>
+				<th class="col-date">Date</th>
+			</tr>
+		</thead>
+		<tbody>
+			{ctfs.map((ctf) => (
+				<tr>
+					<td class="col-rank">
+						{ctf.data.placement != null ? (
+							<span class={`rank ${ctf.data.placement === 1 ? 'rank-first' : ''}`}>
+								{ordinal(ctf.data.placement)}
+							</span>
+						) : (
+							<span class="rank dq">{ctf.data.status ?? '—'}</span>
+						)}
+					</td>
+					<td class="ctf-name">
+						<span>{ctf.data.name}</span>
+						{ctf.data.division && <span class="division">{ctf.data.division}</span>}
+					</td>
+					<td class="col-team">{ctf.data.team}</td>
+					<td class="col-date"><FormattedDate date={ctf.data.date} /></td>
+				</tr>
+			))}
+		</tbody>
+	</table>
+
+	<style>
+		main {
+			max-width: 900px;
+			margin: 0 auto;
+			padding: 4em 2em;
+		}
+		h1 {
+			color: var(--accent);
+			margin-bottom: var(--space-8);
+		}
+
+		.board {
+			width: 100%;
+			border-collapse: collapse;
+			font-size: 0.95rem;
+		}
+
+		thead th {
+			text-align: left;
+			padding: 0 var(--space-4) var(--space-3);
+			color: var(--text-muted);
+			font-family: 'Space Grotesk', sans-serif;
+			font-weight: 600;
+			font-size: 0.7rem;
+			text-transform: uppercase;
+			letter-spacing: 0.1em;
+			border-bottom: 1px solid var(--border-strong);
+		}
+
+		tbody td {
+			padding: var(--space-4);
+			border-bottom: 1px solid var(--border);
+			vertical-align: middle;
+		}
+
+		tbody tr {
+			transition: background 0.25s ease;
+		}
+		tbody tr:hover {
+			background: var(--surface);
+		}
+
+		.col-rank { width: 1%; white-space: nowrap; }
+		.col-team, .col-date { white-space: nowrap; color: var(--text-muted); }
+
+		.rank {
+			font-family: 'Space Grotesk', sans-serif;
+			font-weight: 700;
+			color: var(--accent-secondary);
+		}
+		.rank-first {
+			color: var(--accent);
+			text-shadow: 0 0 12px rgba(255, 217, 125, 0.45);
+		}
+		.dq {
+			color: var(--text-muted);
+			border: 1px solid var(--border);
+			border-radius: 999px;
+			padding: 0.1em 0.6em;
+			font-size: 0.75rem;
+			font-weight: 600;
+		}
+
+		.division {
+			display: inline-block;
+			margin-left: var(--space-3);
+			padding: 0.1em 0.5em;
+			font-size: 0.7rem;
+			color: var(--accent-secondary);
+			border: 1px solid var(--border);
+			border-radius: var(--radius-sm);
+		}
+
+		@media (max-width: 720px) {
+			.col-team, .col-date { display: none; }
+			thead .col-team, thead .col-date { display: none; }
+		}
+	</style>
+</BaseLayout>

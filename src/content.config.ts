@@ -1,16 +1,13 @@
 import { defineCollection } from 'astro:content';
-import { glob } from 'astro/loaders';
+import { glob, file } from 'astro/loaders';
 import { z } from 'astro/zod';
 
 const writeups = defineCollection({
-	// Load Markdown and MDX files in the `src/content/writeups/` directory.
 	loader: glob({ base: './src/content/writeups', pattern: '**/*.{md,mdx}' }),
-	// Type-check frontmatter using a schema
 	schema: ({ image }) =>
 		z.object({
 			title: z.string(),
 			description: z.string(),
-			// Transform string to Date object
 			pubDate: z.coerce.date(),
 			updatedDate: z.coerce.date().optional(),
 			heroImage: z.optional(image()),
@@ -35,4 +32,16 @@ const projects = defineCollection({
 
 });
 
-export const collections = { writeups, projects };
+const ctfs = defineCollection({
+	loader: file('./src/content/ctfs.yaml'),
+	schema: z.object({
+		name: z.string(),
+		date: z.coerce.date(),
+		team: z.string(),
+		placement: z.number().optional(),
+		division: z.string().optional(),
+		status: z.string().optional(),
+	}),
+});
+
+export const collections = { writeups, projects, ctfs };

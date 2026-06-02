@@ -1,0 +1,30 @@
+- id: tjctf-2026
+  name: TJCTF 2026
+  date: 2026-05-17
+  team: Melona Bar Salesmen
+  placement: 64
+  division: 2nd USHS
+
+- id: ritsec-2026
+  name: RITSEC CTF 2026
+  date: 2026-04-05
+  team: tjcsc
+  status: DQ
+
+- id: asis-final-2025
+  name: ASIS CTF Final 2025
+  date: 2025-12-28
+  team: tjcsc
+  placement: 17
+
+- id: winterctf-2025
+  name: WinterCTF 2025
+  date: 2025-12-12
+  team: Solo
+  placement: 1
+
+- id: vuwctf-2025
+  name: VuwCTF 2025
+  date: 2025-12-06
+  team: tjcsc
+  placement: 5
