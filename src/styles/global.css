@@ -230,6 +230,11 @@ hr {
 .tag-typescript { color: #3178C6; }
 .tag-tailwind { color: #38BDF8; }
 .tag-llama { color: #9D00FF; }
+.tag-groq { color: #F55036; }
+.tag-websockets { color: #4EAA25; }
+.tag-redis { color: #DC382D; }
+.tag-chrome-api { color: #4285F4; }
+.tag-gemini { color: #8E75F0; }
 
 .title {
 	font-size: 1.3rem;

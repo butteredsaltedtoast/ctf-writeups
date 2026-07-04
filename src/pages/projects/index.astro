@@ -21,7 +21,7 @@ const projects = (await getCollection('projects')).sort(
 					<p class="description">{project.data.description}</p>
 					<div class="stack">
 						{project.data.stack?.map((tag) => (
-							<span class={`tag tag-${tag.toLowerCase()}`}>{tag}</span>
+							<span class={`tag tag-${tag.toLowerCase().replace(/\s+/g, '-')}`}>{tag}</span>
 						))}
 					</div>
 				</div>
