@@ -89,7 +89,7 @@ spell.html has this interesting line.
 
 This means our incantation is rendered as raw HTML. Nice. We could try something like ``<script>alert(1)</script>``.
 But...
-```
+```python
 def sanitize(text):
     return re.sub(r'<\s*script', '', text, flags=re.IGNORECASE)
 ```
@@ -98,7 +98,6 @@ Darn. Well, it strips "``<script``" case-insensitively. But that's literally all
 For example, ``<img src=x onerror="alert(1)">``. No "``<script``" there. Let's give it a shot.
 Make a spell where the incantation is just that and visit it.
 ![Nice](./nice.png)
-Nice.
 
 Okay, we've got something that runs on a spell page, and reporting it to the admin means it runs as the admin.
 So, let's try and fetch literally anything out to the webhook to see if it works.
